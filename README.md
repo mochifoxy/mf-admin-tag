@@ -28,12 +28,12 @@
 1. `mf_admin_tags.sma` dosyasını derleyin.
 2. Çıkan `mf_admin_tags.amxx` dosyasını sunucunuzun `cstrike/addons/amxmodx/plugins/` klasörüne atın.
 3. `cstrike/addons/amxmodx/configs/plugins.ini` dosyasını açın.
-4. **En üst satıra** `mf_admin_tags.amxx` yazıp kaydedin.
+4. `plugins.ini` dosyasında gag ve antiflood gibi moderasyon eklentilerinin altına (`mf_admin_tags.amxx` şeklinde) ekleyip kaydedin.
 5. Sunucuyu yeniden başlatın veya harita değiştirin.
 
-[size=large][color=#ff0000][b]⚠️ ÖNEMLİ KURULUM NOTU: ⚠️[/b][/color]
-Bu eklentinin sorunsuz çalışması, diğer sohbet eklentileriyle çakışmaması ve yetkilerin/gizli komutların düzgün işlenmesi için [b]plugins.ini[/b] dosyasında [color=#ff0000][b]EN ÜSTE (en başta)[/b][/color] yazılması gerekmektedir!
-- Eklentideki yeni keşfedilen bug ve mantık hataları temizlendi.[/size]
+> [!IMPORTANT]
+> **⚠️ ÖNEMLİ KURULUM NOTU:**
+> Bu eklentinin sorunsuz çalışması; susturma (gag), sohbet koruması (antiflood) ve diğer sohbet engelleme eklentileriyle çakışmaması için **plugins.ini** dosyasında **bu eklentilerin ALTINDA** (mümkünse listenin sonlarında) yer almalıdır. Eğer en üste yazılırsa, susturulan oyuncuların mesajları engellenmeden önce bu eklenti tarafından herkese yazdırılır.
 
 ---
 
