@@ -113,7 +113,7 @@ load_tags() {
     new file = fopen(filepath, "r");
     if (!file) return;
 
-    new line[128];
+    new line[256];
     new auth[35], tag[32], tag_color_str[4], text_color_str[4], name_color_str[4];
 
     while (!feof(file) && g_count < MAX_ADMIN_TAGS) {
