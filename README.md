@@ -8,7 +8,7 @@
 ## 🌟 Özellikler
 
 - 🚀 **Yüksek Performans (Caching):** Her mesajda listeyi baştan sona taramaz. Oyuncu sunucuya girdiğinde tagı belleğe alınır (O(1) performansı).
-- 👑 **Gelişmiş Yetki Sistemi:** Tagları `SteamID`, `Nickname` veya **Yetki Harfi (Flag)** (`FLAG_d` vb.) üzerinden kolayca atayabilirsiniz.
+- 👑 **Gelişmiş Yetki Sistemi:** Tagları `SteamID`, `Nickname` veya **Yetki Harfi (Flag)** (`@d` / `@FLAG_d` vb.) üzerinden kolayca atayabilirsiniz.
 - 🎨 **Tam Renk Kontrolü:** Tag rengini, isim rengini ve mesaj rengini birbirinden bağımsız olarak (Yeşil, Kırmızı, Mavi, Sarı) ayarlayabilirsiniz.
 - 👻 **Orijinal Oyun Mantığı:** Ölü oyuncuların başına `*ÖLÜ*`, izleyicilerin başına `*İZLEYİCİ*` ekler. Ölülerin mesajlarını diriler göremez (orijinal CS 1.6 kuralı).
 - 💬 **Gelişmiş Takım Sohbeti:** Takım konuşmalarında düz "(Team)" yerine dinamik olarak `(Terrorist)`, `(Counter-Terrorist)` veya `(Spectator)` yazar.
@@ -25,11 +25,15 @@
 
 ## 🛠️ Kurulum
 
-1. `admin_tags.sma` dosyasını derleyin.
-2. Çıkan `admin_tags.amxx` dosyasını sunucunuzun `cstrike/addons/amxmodx/plugins/` klasörüne atın.
+1. `mf_admin_tags.sma` dosyasını derleyin.
+2. Çıkan `mf_admin_tags.amxx` dosyasını sunucunuzun `cstrike/addons/amxmodx/plugins/` klasörüne atın.
 3. `cstrike/addons/amxmodx/configs/plugins.ini` dosyasını açın.
-4. **En alt satıra** `admin_tags.amxx` yazıp kaydedin. *(Gizli komutların ifşa olmaması için en altta olması zorunludur!)*
+4. **En üst satıra** `mf_admin_tags.amxx` yazıp kaydedin.
 5. Sunucuyu yeniden başlatın veya harita değiştirin.
+
+[size=large][color=#ff0000][b]⚠️ ÖNEMLİ KURULUM NOTU: ⚠️[/b][/color]
+Bu eklentinin sorunsuz çalışması, diğer sohbet eklentileriyle çakışmaması ve yetkilerin/gizli komutların düzgün işlenmesi için [b]plugins.ini[/b] dosyasında [color=#ff0000][b]EN ÜSTE (en başta)[/b][/color] yazılması gerekmektedir!
+- Eklentideki yeni keşfedilen bug ve mantık hataları temizlendi.[/size]
 
 ---
 
@@ -39,7 +43,7 @@ Eklenti ilk çalıştığında `configs/admin_tags.ini` dosyasını otomatik ola
 
 ### 📝 Kullanım Şeması
 ```ini
-"SteamID / Nick / FLAG_x"  "Tag Metni"  "Tag Rengi"  "Yazi Rengi"  "Isim Rengi"
+"SteamID / Nick / @Yetki"  "Tag Metni"  "Tag Rengi"  "Yazi Rengi"  "Isim Rengi"
 ```
 
 ### 🎨 Renk Kodları
@@ -60,15 +64,15 @@ Eklenti ilk çalıştığında `configs/admin_tags.ini` dosyasını otomatik ola
 "MochiFoxy"            "🌸 Support"  "1" "4" "3"
 
 ; 2. Genel Yetkiler (Bunlari alta yazin)
-"FLAG_l"               "🛠️ Yonetici" "1" "1" "1"
-"FLAG_d"               "🛡️ Admin"    "3" "1" "3"
-"FLAG_b"               "🌟 VIP"      "1" "4" "1"
+"@l"                   "🛠️ Yonetici" "1" "1" "1"
+"@d"                   "🛡️ Admin"    "3" "1" "3"
+"@b"                   "🌟 VIP"      "1" "4" "1"
 ```
 
 > 📌 **Önemli (Yetki Önceliği):** Eklenti listeyi **yukarıdan aşağıya** doğru okur ve eşleşen **ilk** tagı verir. 
 > - Eğer bir oyuncunun birden fazla yetkisi varsa (örneğin hem `FLAG_l` hem `FLAG_d` yetkisi), dosyada **üstte** hangi yetki yazılıysa o tagı alır.
 > - Bu yüzden tagları önem sırasına göre (en yetkiliden en az yetkiliye doğru) yukarıdan aşağıya doğru sıralamalısınız.
-> - Ayrıca özel (SteamID/Nick) tanımlamaları daima genel yetkilerden (FLAG_x) **üstte** olmalıdır.
+> - Ayrıca özel (SteamID/Nick) tanımlamaları daima genel yetkilerden (@Yetki) **üstte** olmalıdır.
 
 ---
 <div align="center">
