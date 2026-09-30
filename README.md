@@ -1,23 +1,31 @@
-# 👑 MF Admin Chat Tags Ultra (v2.1)
+# 👑 MF Admin Chat Tags Ultra (v2.2)
 
 [![AMX Mod X](https://img.shields.io/badge/AMX%20Mod%20X-1.9%20%7C%201.10-blue.svg)](https://www.amxmodx.org/)
-[![ReAPI](https://img.shields.io/badge/ReAPI-Supported-green.svg)](https://github.com/s1lentq/reapi)
-[![Platform](https://img.shields.io/badge/Engine-GoldSrc%20(CS%201.6)-orange.svg)](https://store.steampowered.com/app/10/CounterStrike/)
+[![ReAPI](https://img.shields.io/badge/ReAPI-Required-green.svg)](https://github.com/s1lentq/reapi)
+[![Platform](https://img.shields.io/badge/Engine-ReHLDS%20%7C%20GoldSrc-orange.svg)](https://store.steampowered.com/app/10/CounterStrike/)
 [![License](https://img.shields.io/badge/License-Non--Commercial-red.svg)](LICENSE)
 
-Counter-Strike 1.6 (ReHLDS / HLDS) sunucuları için geliştirilmiş, yüksek performanslı, **SteamID**, **ValveID (Non-Steam)**, **Oyuncu İsmi (Nick)** ve **Admin Yetkilerine (@flag)** göre özelleştirilebilir, çökme (crash) korumalı gelişmiş sohbet tag sistemi.
+Counter-Strike 1.6 (ReHLDS) sunucuları için geliştirilmiş, **ReAPI** destekli, ultra yüksek performanslı, **SteamID**, **ValveID (Non-Steam)**, **Botlar**, **Oyuncu İsmi (Nick)** ve **Admin Yetkilerine (@flag)** göre özelleştirilebilir, çökme (crash) korumalı gelişmiş sohbet tag sistemi.
 
 > ⛔ **ÖNEMLİ LİSANS UYARISI:** Bu eklenti tamamen ücretsiz ve açık kaynaklıdır. Para karşılığı **SATILMASI**, ücretli paketlere dahil edilmesi veya **ticari amaçla kullanılması KESİNLİKLE YASAKTIR**.
+
+---
+
+## 📋 Sistem Gereksinimleri
+
+* **Oyun Motoru:** ReHLDS & ReGameDLL (En güncel sürüm önerilir)
+* **AMX Mod X:** v1.9 veya v1.10+
+* **ReAPI:** Kurulu ve aktif olmalıdır (Doğrudan bellek seviyesinde takım ve oyuncu erişimi için)
 
 ---
 
 ## ✨ Özellikler
 
 - 🛡️ **Tam Çökme Koruması (Anti-Crash):** CS 1.6 `SayText` ağ paketi taşmalarını (`SZ_GetSpace: overflow`) ve format exploit'lerini (`%` crash) %100 engelleyen dinamik kırpma motoru.
-- 🎯 **SteamID & ValveID Desteği:** `STEAM_0:0:...` ve `VALVE_0:4:...` (DProto/Reunion) tüm kimlik formatlarını büyük/küçük harf duyarsız otomatik tanır.
-- 🎨 **Özelleştirilebilir Baş ve Son Süslemeleri:** Tagın başındaki (örn: `{`, `[`, `<`, `★`) ve sonundaki (`}`, `]`, `>`, `★`) süslemeleri ve bu süslemelerin renklerini birbirinden ve tagdan **bağımsız** olarak belirleyebilme.
+- 🎯 **SteamID, ValveID & Bot Desteği:** `STEAM_0:0:...`, `VALVE_0:4:...` (DProto/Reunion) ve sunucu içi botlar için yinelenmeyen otomatik kimlik doğrulaması.
+- 🎨 **Özelleştirilebilir Baş ve Son Süslemeleri:** Tagın başındaki (örn: `{`, `[`, `<`, `*`, `#`) ve sonundaki (`}`, `]`, `>`, `*`, `#`) süslemeleri ve bu süslemelerin renklerini birbirinden ve tagdan **bağımsız** olarak belirleyebilme.
 - 🌈 **Zengin Renk Paleti:** Yeşil (`1`), Kırmızı (`2`), Mavi (`3`), Sarı/Normal (`4`), Gri (`5`) ve Otomatik Takım Rengi (`6`).
-- ⚡ **Yüksek Performans & Bellek Yönetimi:** Hash tabanlı **Trie** veri yapısı ile sıfır gecikme (zero latency).
+- ⚡ **Yüksek Performans & Sıfır FPS/Lag Etkisi:** Hash tabanlı **Trie** veri yapısı ve izole task yönetimiyle sunucu tickrate/FPS değerini kesinlikle düşürmez.
 - 🔄 **Canlı Yenileme (`amx_reloadtags`):** Sunucuya veya haritaya restart atmadan `admin_tags.ini` dosyasını anında yeniden yükleme.
 - 💬 **Takım Sohbeti (`say_team`) Desteği:** `(Terrorist)`, `(Counter-Terrorist)`, `*OLU*` ve `*IZLEYICI*` durumlarını renkleri bozmadan kusursuz korur.
 
@@ -28,7 +36,7 @@ Counter-Strike 1.6 (ReHLDS / HLDS) sunucuları için geliştirilmiş, yüksek pe
 Bu proje açık kaynaklıdır ve `.sma` kaynak kodu olarak sağlanır.
 
 1. **Derleme:**
-   * `mf_admin_tags.sma` dosyasını yerel AMX Mod X derleyicinizle (`amxxpc`) veya online AMXX derleyicisiyle derleyerek `mf_admin_tags.amxx` dosyasını elde edin.
+   * `mf_admin_tags.sma` dosyasını `include/reapi.inc` barındıran yerel AMX Mod X derleyicinizle (`amxxpc`) derleyerek `mf_admin_tags.amxx` dosyasını elde edin.
 2. **Yükleme:**
    * Derlediğiniz `mf_admin_tags.amxx` dosyasını sunucunuzun `cstrike/addons/amxmodx/plugins/` dizinine yükleyin.
    * `cstrike/addons/amxmodx/configs/plugins.ini` dosyasını açıp en alta şu satırı ekleyin:
@@ -108,5 +116,5 @@ Bu proje **Ticari Olmayan Yazılım Lisansı (Non-Commercial Software License)**
 ## 👤 Geliştirici
 
 * **Yazar:** MochiFoxy
-* **Sürüm:** 2.1
+* **Sürüm:** 2.2
 * **GitHub:** [mochifoxy/mf-admin-tag](https://github.com/mochifoxy/mf-admin-tag)

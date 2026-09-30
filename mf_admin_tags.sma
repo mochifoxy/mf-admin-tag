@@ -10,6 +10,9 @@
 #define MAX_ADMIN_TAGS 128
 #define MAX_SAYTEXT_LEN 185
 
+#define TASK_DEFERRED_FIND 1000
+#define TASK_NAME_CHANGE   2000
+
 new g_auth[MAX_ADMIN_TAGS][35];
 new g_tag[MAX_ADMIN_TAGS][32];
 new g_tag_color[MAX_ADMIN_TAGS];
@@ -74,10 +77,13 @@ public cmd_reload_tags(id, level, cid) {
 public client_putinserver(id) {
     if (id < 1 || id > MF_MAX_PLAYERS) return;
     
+    remove_task(TASK_DEFERRED_FIND + id);
+    remove_task(TASK_NAME_CHANGE + id);
+
     g_player_tag_index[id] = -1;
     find_player_tag(id);
     
-    set_task(1.5, "task_deferred_find", id);
+    set_task(1.5, "task_deferred_find", TASK_DEFERRED_FIND + id);
 }
 
 public client_authorized(id, const authid[]) {
@@ -86,7 +92,14 @@ public client_authorized(id, const authid[]) {
     find_player_tag(id);
 }
 
-public task_deferred_find(id) {
+public task_deferred_find(taskid) {
+    new id = taskid - TASK_DEFERRED_FIND;
+    if (id < 1 || id > MF_MAX_PLAYERS || !is_user_connected(id)) return;
+    find_player_tag(id);
+}
+
+public task_verify_name_tag(taskid) {
+    new id = taskid - TASK_NAME_CHANGE;
     if (id < 1 || id > MF_MAX_PLAYERS || !is_user_connected(id)) return;
     find_player_tag(id);
 }
@@ -95,7 +108,8 @@ public client_disconnected(id) {
     if (id < 1 || id > MF_MAX_PLAYERS) return;
     
     g_player_tag_index[id] = -1;
-    remove_task(id);
+    remove_task(TASK_DEFERRED_FIND + id);
+    remove_task(TASK_NAME_CHANGE + id);
 }
 
 public client_infochanged(id) {
@@ -107,6 +121,9 @@ public client_infochanged(id) {
 
     if (!equal(newname, oldname)) {
         find_player_tag(id, newname);
+        // Harici isim filtresi/engelleyici eklentilerin mudahalesini sifir lag ile dogrulamak icin 0.1s teyit gorevi
+        remove_task(TASK_NAME_CHANGE + id);
+        set_task(0.1, "task_verify_name_tag", TASK_NAME_CHANGE + id);
     }
 }
 
@@ -189,9 +206,9 @@ load_tags() {
         copy(auth_lower, charsmax(auth_lower), auth);
         strtolower(auth_lower);
 
-        // SteamID veya ValveID veya Nick kontrolu (Tekrar eden kayitlari engelle)
+        // SteamID veya ValveID veya Nick veya BOT kontrolu (Tekrar eden kayitlari engelle)
         if (auth[0] != '@') {
-            if (containi(auth, "STEAM_") == 0 || containi(auth, "VALVE_") == 0) {
+            if (containi(auth, "STEAM_") == 0 || containi(auth, "VALVE_") == 0 || equal(auth_lower, "bot")) {
                 if (TrieKeyExists(g_auth_trie, auth_lower)) {
                     continue;
                 }
