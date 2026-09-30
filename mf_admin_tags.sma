@@ -3,7 +3,7 @@
 #include <reapi>
 
 #define PLUGIN  "MF Admin Tag System"
-#define VERSION "2.1"
+#define VERSION "2.2"
 #define AUTHOR  "MochiFoxy"
 
 #define MF_MAX_PLAYERS 32
@@ -15,9 +15,9 @@ new g_tag[MAX_ADMIN_TAGS][32];
 new g_tag_color[MAX_ADMIN_TAGS];
 new g_text_color[MAX_ADMIN_TAGS];
 new g_name_color[MAX_ADMIN_TAGS];
-new g_open_bracket[MAX_ADMIN_TAGS][12];
+new g_open_bracket[MAX_ADMIN_TAGS][16];
 new g_open_color[MAX_ADMIN_TAGS];
-new g_close_bracket[MAX_ADMIN_TAGS][12];
+new g_close_bracket[MAX_ADMIN_TAGS][16];
 new g_close_color[MAX_ADMIN_TAGS];
 new g_req_flags[MAX_ADMIN_TAGS];
 new g_count = 0;
@@ -160,7 +160,7 @@ load_tags() {
 
     new line[256];
     new auth[35], tag[32], tag_color_str[4], text_color_str[4], name_color_str[4];
-    new open_bracket[12], open_color_str[4], close_bracket[12], close_color_str[4];
+    new open_bracket[16], open_color_str[4], close_bracket[16], close_color_str[4];
     new auth_lower[35];
 
     while (!feof(file) && g_count < MAX_ADMIN_TAGS) {
@@ -336,7 +336,7 @@ build_tag_decoration(index, output[], maxlen) {
     get_color_prefix(g_tag_color[index], tag_col_prefix, charsmax(tag_col_prefix));
     get_color_prefix(g_close_color[index], close_col_prefix, charsmax(close_col_prefix));
 
-    new open_str[24], tag_str[40], close_str[24];
+    new open_str[32], tag_str[48], close_str[32];
     open_str[0] = 0;
     tag_str[0] = 0;
     close_str[0] = 0;
@@ -453,7 +453,7 @@ public cmd_say(id) {
         name_prefix,  charsmax(name_prefix),
         target_team);
 
-    new header[128];
+    new header[160];
     if (tag_full[0] != 0) {
         formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01: %s",
             alive_prefix, team_str, tag_full, name_prefix, name, text_prefix);
@@ -513,7 +513,7 @@ public cmd_say_team(id) {
         name_prefix,  charsmax(name_prefix),
         target_team);
 
-    new header[128];
+    new header[160];
     if (tag_full[0] != 0) {
         formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01: %s",
             alive_prefix, team_str, tag_full, name_prefix, name, text_prefix);
