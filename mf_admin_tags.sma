@@ -470,14 +470,17 @@ public cmd_say(id) {
         name_prefix,  charsmax(name_prefix),
         target_team);
 
+
     new header[160];
     if (tag_full[0] != 0) {
-        formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01: %s",
+        formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01> %s",
             alive_prefix, team_str, tag_full, name_prefix, name, text_prefix);
-    } else {
-        formatex(header, charsmax(header), "^x01%s%s%s%s ^x01: %s",
+    } 
+    else {
+        formatex(header, charsmax(header), "^x01%s%s%s%s ^x01> %s",
             alive_prefix, team_str, name_prefix, name, text_prefix);
     }
+
 
     // CS 1.6 SayText buffer tasmasini ve istemci cokmesini (crash) %100 engelleyen dinamik kirpma
     new header_len = strlen(header);
@@ -532,10 +535,10 @@ public cmd_say_team(id) {
 
     new header[160];
     if (tag_full[0] != 0) {
-        formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01: %s",
+        formatex(header, charsmax(header), "^x01%s%s%s %s%s ^x01> %s",
             alive_prefix, team_str, tag_full, name_prefix, name, text_prefix);
     } else {
-        formatex(header, charsmax(header), "^x01%s%s%s%s ^x01: %s",
+        formatex(header, charsmax(header), "^x01%s%s%s%s ^x01> %s",
             alive_prefix, team_str, name_prefix, name, text_prefix);
     }
 
